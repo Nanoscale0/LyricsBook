@@ -1,6 +1,7 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import React from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import Card from "../../../components/Card";
 import IconButton from "../../../components/IconButton";
 import MaterialIcon from "../../../components/MaterialIcon";
 import SystemBack from "../../../components/SystemBack";
@@ -26,8 +27,23 @@ const SearchBar = ({ keyword, setKeyword, isSearch, setIsSearch, navigation }: S
     };
 
     return (
-        <View
-            style={styles.searchBar}>
+        <Card
+            onPress={() => {setIsSearch(true)}}
+            disabled={isSearch}
+            style={styles.searchBar}
+            overlay={isSearch? (
+                <IconButton
+                    icon="close"
+                    onPress={clearKeyword}
+                    style={styles.iconButton} />
+            ) : (
+                <IconButton
+                    icon="dots-vertical"
+                    style={styles.iconButton}
+                    onPress={() => {
+                        navigation.navigate("Setting");
+                    }} />
+            )}>
             {isSearch ? (
                 <>
                     <SystemBack
@@ -38,10 +54,6 @@ const SearchBar = ({ keyword, setKeyword, isSearch, setIsSearch, navigation }: S
                         autoFocus
                         onBlur={_onBlur}
                         onChangeText={setKeyword} />
-                    <IconButton
-                        icon="close"
-                        onPress={clearKeyword}
-                        style={styles.iconButton} />
                 </>
             ) : (
                 <>
@@ -51,19 +63,9 @@ const SearchBar = ({ keyword, setKeyword, isSearch, setIsSearch, navigation }: S
                         color="#000"
                         size={24} />
                     <Text style={styles.text}>Search...</Text>
-                    <Pressable
-                        style={styles.ripple}
-                        onPress={() => {setIsSearch(true)}}
-                        android_ripple={{color: "rgba(0, 0, 0, 0.1)"}} />
-                    <IconButton
-                        icon="dots-vertical"
-                        style={styles.iconButton}
-                        onPress={() => {
-                            navigation.navigate("Setting");
-                        }} />
                 </>
             )}
-        </View>
+        </Card>
     );
 };
 
@@ -71,19 +73,9 @@ const styles = StyleSheet.create({
     searchBar: {
         margin: 15,
         backgroundColor: "#ffd396",
-        borderRadius: 8,
         height: 45,
         flexDirection: "row",
         alignItems: "center",
-        overflow: "hidden"
-    },
-    ripple: {
-        position: "absolute",
-        zIndex: 0,
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0
     },
     icon: {
         marginLeft: 12,

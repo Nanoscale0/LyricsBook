@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
+import Card from "./Card";
 
 interface LyricsItemProps {
     data: SongData;
@@ -9,8 +10,11 @@ interface LyricsItemProps {
 
 const LyricsItem = ({ data, onPress, onLongPress }: LyricsItemProps) => {
     return (
-        <View
-            style={styles.lyricsItem}>
+        <Card
+            border
+            style={styles.lyricsItem}
+            onPress={onPress}
+            onLongPress={onLongPress}>
             <Image
                 style={styles.artwork}
                 source={{ uri: data.artwork }} />
@@ -21,12 +25,7 @@ const LyricsItem = ({ data, onPress, onLongPress }: LyricsItemProps) => {
                     <Text style={styles.album}> - {data.album}</Text>
                 </Text>
             </View>
-            <Pressable
-                style={styles.ripple}
-                onPress={onPress}
-                onLongPress={onLongPress}
-                android_ripple={{color: "rgba(0, 0, 0, 0.1)"}} />
-        </View>
+        </Card>
     );
 };
 
@@ -34,19 +33,7 @@ const styles = StyleSheet.create({
     lyricsItem: {
         marginHorizontal: 15,
         marginVertical: 6,
-        flexDirection: "row",
-        backgroundColor: "#FFF",
-        borderWidth: 0.5,
-        borderColor: "rgba(0, 0, 0, 0.1)",
-        borderRadius: 8,
-        overflow: "hidden"
-    },
-    ripple: {
-        position: "absolute",
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0
+        flexDirection: "row"
     },
     artwork: {
         width: 90,
