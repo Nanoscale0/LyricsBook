@@ -1,8 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import Library from "./components/Library";
 import SearchBar from "./components/SearchBar";
-import SavedList from "./components/SavedList";
 import { RootStackParamList } from "../../App";
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, "Home">;
@@ -19,7 +19,7 @@ const HomeScreen = ({ route, navigation }: HomeScreenProps) => {
                 isSearch={isSearch}
                 setIsSearch={setIsSearch}
                 navigation={navigation} />
-            <SavedList
+            <Library
                 navigation={navigation}
                 searchKeyword={searchKeyword} />
         </View>

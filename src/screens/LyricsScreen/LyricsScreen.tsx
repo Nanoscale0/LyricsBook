@@ -43,7 +43,7 @@ const LyricsScreen = ({ route, navigation }: LyricsScreenProps) => {
 
 const styles = StyleSheet.create({
     lyricsText: {
-        marginHorizontal: 20,
+        margin: 20,
         fontSize: 24,
         fontWeight: "bold",
         color: "#000",

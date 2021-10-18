@@ -10,12 +10,12 @@ import { siteList } from "../../../values/sites";
 import SearchOnlineBtn from "./SearchOnlineBtn";
 import { RootStackParamList } from "../../../App";
 
-interface SavedListProps {
+interface LibraryProps {
     navigation: NativeStackNavigationProp<RootStackParamList, "Home">;
     searchKeyword: string;
 }
 
-const SavedList = ({ navigation, searchKeyword }: SavedListProps) => {
+const Library = ({ navigation, searchKeyword }: LibraryProps) => {
     const [data, setData] = useState<SavedList>([]);
     const [searchResults, setSearchResults] = useState<Fuse.FuseResult<SavedItem>[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -59,7 +59,8 @@ const SavedList = ({ navigation, searchKeyword }: SavedListProps) => {
                     data={item.item.songData}
                     onPress={() => {
                         navigation.navigate("Lyrics", { item: item.item });
-                    }} />
+                    }}
+                    onLongPress={() => popupRemoveAlert(item.item.id)} />
             )}
             ListFooterComponent={
                 <>
@@ -84,7 +85,7 @@ const SavedList = ({ navigation, searchKeyword }: SavedListProps) => {
                     onLongPress={() => popupRemoveAlert(item.id)} />
             )}
             ListHeaderComponent={
-                <Heading title="Saved Lyrics" />
+                <Heading title="Library" />
             }
             refreshControl={
                 <RefreshControl
@@ -95,4 +96,4 @@ const SavedList = ({ navigation, searchKeyword }: SavedListProps) => {
     );
 };
 
-export default SavedList;
+export default Library;
