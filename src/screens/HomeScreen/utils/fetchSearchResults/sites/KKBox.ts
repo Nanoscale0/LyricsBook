@@ -1,8 +1,12 @@
 import * as cheerio from 'cheerio';
+import { Site } from '../../../../../values/sites';
 
-const fetchSearchResults = async (keyword: string) => {
+const KKBox = async (keyword: string, site: Site) => {
     console.log("Search");
-    const response = await fetch(`https://www.kkbox.com/tw/tc/search.php?word=${keyword}&search=song`);
+    const url = site === "KKBoxTW"
+        ? `https://www.kkbox.com/tw/tc/search.php?word=${keyword}&search=song`
+        : `https://www.kkbox.com/hk/tc/search.php?word=${keyword}&search=song`;
+    const response = await fetch(url);
     const html = await response.text();
     const $ = cheerio.load(html);
     
@@ -18,6 +22,7 @@ const fetchSearchResults = async (keyword: string) => {
         const item: SearchResultItem = {
             songData,
             url,
+            site,
             hasLyrics: true
         };
         searchResult.push(item);
@@ -26,4 +31,4 @@ const fetchSearchResults = async (keyword: string) => {
     return searchResult;
 };
 
-export default fetchSearchResults;
+export default KKBox;

@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         alignItems: "flex-start"
     },
     title: {
+        flex: 1,
         fontSize: 26,
         fontWeight: "bold",
         color: "#000000",

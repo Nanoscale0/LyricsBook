@@ -15,7 +15,7 @@ const LyricsScreen = ({ route, navigation }: LyricsScreenProps) => {
     useEffect(() => {
         if ((item as any).url) {
             const searchResultItem = item as SearchResultItem;
-            fetchLyrics(searchResultItem.url).then(lyrics => {
+            fetchLyrics(searchResultItem.url, searchResultItem.site).then(lyrics => {
                 setLyricsText(lyrics);
                 const id = nanoid();
                 const savedItem: SavedItem = {

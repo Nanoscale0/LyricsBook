@@ -8,6 +8,7 @@ interface SongData {
 interface SearchResultItem {
     songData: SongData,
     url: string,
+    site: import("../values/sites").Site,
     hasLyrics: boolean | null
 }
 
