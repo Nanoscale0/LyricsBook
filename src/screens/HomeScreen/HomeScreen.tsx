@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import SearchBar from "./components/SearchBar";
 import SavedList from "./components/SavedList";
+import { RootStackParamList } from "../../App";
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, "Home">;
 

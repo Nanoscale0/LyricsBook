@@ -8,6 +8,7 @@ import Fuse from 'fuse.js';
 import Heading from "./Heading";
 import { siteList } from "../../../values/sites";
 import SearchOnlineBtn from "./SearchOnlineBtn";
+import { RootStackParamList } from "../../../App";
 
 interface SavedListProps {
     navigation: NativeStackNavigationProp<RootStackParamList, "Home">;

@@ -1,6 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
+import { RootStackParamList } from "../../App";
+import Header from "../../components/Header";
 import LyricsItem from "../../components/LyricsItem";
 import fetchSearchResults from "../HomeScreen/utils/fetchSearchResults";
 
@@ -20,6 +22,9 @@ const OnlineSearchScreen = ({ route, navigation }: OnlineSearchScreenProps) => {
 
     return (
         <View>
+            <Header
+                back={navigation.goBack}
+                title="Settings" />
             <FlatList
                 data={searchResults}
                 renderItem={({ item }) => (

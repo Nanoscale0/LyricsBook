@@ -10,6 +10,7 @@ import HomeScreen from './screens/HomeScreen';
 import LyricsScreen from './screens/LyricsScreen';
 import OnlineSearchScreen from './screens/OnlineSearchScreen';
 import SettingScreen from './screens/SettingScreen';
+import { Site } from './values/sites';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -46,6 +47,18 @@ const App = () => {
             </Stack.Navigator>
         </NavigationContainer>
     );
+};
+
+export type RootStackParamList = {
+    Home: undefined;
+    Lyrics: {
+        item: SearchResultItem | SavedItem;
+    },
+    OnlineSearch: {
+        keyword: string;
+        site: Site;
+    },
+    Setting: undefined;
 };
 
 export default App;

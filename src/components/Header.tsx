@@ -25,14 +25,14 @@ const Header = ({ title, back }: HeaderProps) => {
 const styles = StyleSheet.create({
     header: {
         flexDirection: "row",
-        marginHorizontal: 15,
-        marginTop: 15,
-        alignItems: "center"
+        margin: 15,
+        alignItems: "flex-start"
     },
     title: {
         fontSize: 26,
         fontWeight: "bold",
         color: "#000000",
+        marginTop: 2
     },
     back: {
         marginRight: 8

@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { RootStackParamList } from "../../App";
 import Header from "../../components/Header";
 import LyricsStorage from "../HomeScreen/utils/LyricsStorage";
 

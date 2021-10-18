@@ -1,6 +1,7 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { StyleSheet, Text } from "react-native";
+import { RootStackParamList } from "../../../App";
 import Card from "../../../components/Card";
 import MaterialIcon from "../../../components/MaterialIcon";
 import i18n from "../../../values/i18n";
@@ -14,7 +15,10 @@ interface SearchOnlineBtnProps {
 
 const SearchOnlineBtn = ({ site, searchKeyword, navigation }: SearchOnlineBtnProps) => {
     const _onPress = () => {
-        navigation.navigate("OnlineSearch", { keyword: searchKeyword });
+        navigation.navigate("OnlineSearch", {
+            keyword: searchKeyword,
+            site: site
+        });
     }
     
     return (

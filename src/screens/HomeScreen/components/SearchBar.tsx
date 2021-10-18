@@ -1,6 +1,7 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
+import { RootStackParamList } from "../../../App";
 import Card from "../../../components/Card";
 import IconButton from "../../../components/IconButton";
 import MaterialIcon from "../../../components/MaterialIcon";

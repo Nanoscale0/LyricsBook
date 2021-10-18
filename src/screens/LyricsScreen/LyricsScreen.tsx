@@ -5,6 +5,7 @@ import fetchLyrics from "../HomeScreen/utils/fetchLyrics";
 import LyricsStorage from "../HomeScreen/utils/LyricsStorage";
 import "react-native-get-random-values";
 import { nanoid } from "nanoid";
+import { RootStackParamList } from "../../App";
 
 type LyricsScreenProps = NativeStackScreenProps<RootStackParamList, "Lyrics">;
 
