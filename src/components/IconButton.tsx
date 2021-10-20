@@ -1,6 +1,7 @@
 import React from "react";
-import { ColorValue, Pressable, PressableProps, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import { ColorValue, PressableProps, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import MaterialIcon from "./MaterialIcon";
+import RipplePressable from "./RipplePressable";
 
 interface IconButtonProps extends PressableProps {
     icon: string;
@@ -10,18 +11,19 @@ interface IconButtonProps extends PressableProps {
     padding?: number;
 }
 
-const IconButton = ({ icon, size, color, style, padding, children, ...other }: IconButtonProps) => {
+const IconButton = React.forwardRef((props: IconButtonProps, ref: React.Ref<View>) => {
+    const { icon, size, color, style, padding, children, ...other } = props;
     const realSize = size ? size : 22;
     
     return (
         <View style={[{
             borderRadius: realSize
         }, styles.container, style]}>
-            <Pressable
-                android_ripple={{color: "rgba(0, 0, 0, 0.2)"}}
+            <RipplePressable
                 style={{
                     padding: padding ? padding : 6
                 }}
+                ref={ref}
                 {...other}>
                 <MaterialIcon
                     name={icon}
@@ -32,10 +34,10 @@ const IconButton = ({ icon, size, color, style, padding, children, ...other }: I
                     }}
                     color={color ? color : "#000000"} />
                 {children}
-            </Pressable>
+            </RipplePressable>
         </View>
     );
-};
+});
 
 const styles = StyleSheet.create({
     container: {

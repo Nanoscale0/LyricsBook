@@ -1,10 +1,11 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { RootStackParamList } from "../../../App";
 import Card from "../../../components/Card";
 import IconButton from "../../../components/IconButton";
 import MaterialIcon from "../../../components/MaterialIcon";
+import Menu from "../../../components/Menu";
 import SystemBack from "../../../components/SystemBack";
 
 interface SearchBarProps {
@@ -16,6 +17,8 @@ interface SearchBarProps {
 }
 
 const SearchBar = ({ keyword, setKeyword, isSearch, setIsSearch, navigation }: SearchBarProps) => {
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    
     const _onBlur = () => {
         if (keyword === "") {
             setIsSearch(false);
@@ -38,12 +41,28 @@ const SearchBar = ({ keyword, setKeyword, isSearch, setIsSearch, navigation }: S
                     onPress={clearKeyword}
                     style={styles.iconButton} />
             ) : (
-                <IconButton
-                    icon="dots-vertical"
-                    style={styles.iconButton}
-                    onPress={() => {
-                        navigation.navigate("Setting");
-                    }} />
+                <Menu
+                    visible={isMenuVisible}
+                    dismiss={() => setIsMenuVisible(false)}
+                    anchor={
+                        <IconButton
+                            icon="dots-vertical"
+                            style={styles.iconButton}
+                            onPress={() => {
+                                setIsMenuVisible(true);
+                            }} />
+                    }>
+                    <Menu.Item
+                        title="Sort by..."
+                        icon="sort" />
+                    <Menu.Item
+                        title="Settings"
+                        icon="cog-outline"
+                        onPress={() => {
+                            navigation.navigate("Setting");
+                            setIsMenuVisible(false);
+                        }} />
+                </Menu>
             )}>
             {isSearch ? (
                 <>

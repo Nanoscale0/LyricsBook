@@ -3,6 +3,7 @@ import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../../App";
 import Header from "../../components/Header";
+import RipplePressable from "../../components/RipplePressable";
 import LyricsStorage from "../HomeScreen/utils/LyricsStorage";
 
 type SettingScreenProps = NativeStackScreenProps<RootStackParamList, "Setting">;
@@ -13,20 +14,18 @@ const SettingScreen = ({ navigation }: SettingScreenProps) => {
             <Header
                 back={navigation.goBack}
                 title="Settings" />
-            <Pressable
+            <RipplePressable
                 onPress={() => {
                     LyricsStorage.export();
-                }}
-                android_ripple={{color: "rgba(0, 0, 0, 0.1)"}}>
+                }}>
                 <Text style={styles.text}>Export Lyrics</Text>
-            </Pressable>
-            <Pressable
+            </RipplePressable>
+            <RipplePressable
                 onPress={() => {
                     LyricsStorage.import();
-                }}
-                android_ripple={{color: "rgba(0, 0, 0, 0.1)"}}>
+                }}>
                 <Text style={styles.text}>Import Lyrics</Text>
-            </Pressable>
+            </RipplePressable>
         </View>
     );
 };
