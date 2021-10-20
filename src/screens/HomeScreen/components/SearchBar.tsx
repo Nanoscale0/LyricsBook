@@ -1,6 +1,7 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { RootStackParamList } from "../../../App";
 import Card from "../../../components/Card";
 import IconButton from "../../../components/IconButton";
@@ -30,11 +31,15 @@ const SearchBar = ({ keyword, setKeyword, isSearch, setIsSearch, navigation }: S
         setIsSearch(false);
     };
 
+    const insets = useSafeAreaInsets();
+
     return (
         <Card
             onPress={() => {setIsSearch(true)}}
             disabled={isSearch}
-            style={styles.searchBar}
+            style={[styles.searchBar, {
+                top: insets.top + 15
+            }]}
             overlay={isSearch? (
                 <IconButton
                     icon="close"
@@ -91,7 +96,9 @@ const SearchBar = ({ keyword, setKeyword, isSearch, setIsSearch, navigation }: S
 
 const styles = StyleSheet.create({
     searchBar: {
-        margin: 15,
+        position: "absolute",
+        left: 15,
+        right: 15,
         backgroundColor: "#ffd396",
         height: 45,
         flexDirection: "row",

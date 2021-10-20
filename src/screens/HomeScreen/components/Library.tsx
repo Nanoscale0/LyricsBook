@@ -9,6 +9,7 @@ import Heading from "./Heading";
 import { siteList } from "../../../values/sites";
 import SearchOnlineBtn from "./SearchOnlineBtn";
 import { RootStackParamList } from "../../../App";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface LibraryProps {
     navigation: NativeStackNavigationProp<RootStackParamList, "Home">;
@@ -19,6 +20,8 @@ const Library = ({ navigation, searchKeyword }: LibraryProps) => {
     const [data, setData] = useState<SavedList>([]);
     const [searchResults, setSearchResults] = useState<Fuse.FuseResult<SavedItem>[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    const insets = useSafeAreaInsets();
     
     useFocusEffect(
         React.useCallback(() => {
@@ -62,6 +65,9 @@ const Library = ({ navigation, searchKeyword }: LibraryProps) => {
                     }}
                     onLongPress={() => popupRemoveAlert(item.item.id)} />
             )}
+            contentContainerStyle={{
+                paddingTop: insets.top + 80
+            }}
             ListFooterComponent={
                 <>
                     {siteList.map(item =>
@@ -84,13 +90,17 @@ const Library = ({ navigation, searchKeyword }: LibraryProps) => {
                     }}
                     onLongPress={() => popupRemoveAlert(item.id)} />
             )}
+            contentContainerStyle={{
+                paddingTop: insets.top + 80
+            }}
             ListHeaderComponent={
                 <Heading title="Library" />
             }
             refreshControl={
                 <RefreshControl
                     refreshing={isLoading}
-                    onRefresh={refresh} />
+                    onRefresh={refresh}
+                    progressViewOffset={insets.top + 80} />
             }
             keyExtractor={item => item.id} />
     );

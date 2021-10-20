@@ -13,15 +13,15 @@ const HomeScreen = ({ route, navigation }: HomeScreenProps) => {
 
     return (
         <View style={styles.homeScreen}>
+            <Library
+                navigation={navigation}
+                searchKeyword={searchKeyword} />
             <SearchBar
                 keyword={searchKeyword}
                 setKeyword={setSearchKeyword}
                 isSearch={isSearch}
                 setIsSearch={setIsSearch}
                 navigation={navigation} />
-            <Library
-                navigation={navigation}
-                searchKeyword={searchKeyword} />
         </View>
     );
 };

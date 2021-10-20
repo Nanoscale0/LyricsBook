@@ -6,12 +6,16 @@ import LyricsStorage from "../HomeScreen/utils/LyricsStorage";
 import "react-native-get-random-values";
 import { nanoid } from "nanoid";
 import { RootStackParamList } from "../../App";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type LyricsScreenProps = NativeStackScreenProps<RootStackParamList, "Lyrics">;
 
 const LyricsScreen = ({ route, navigation }: LyricsScreenProps) => {
     const [lyricsText, setLyricsText] = useState("Loading...");
     const { item } = route.params;
+
+    const insets = useSafeAreaInsets();
+    
     useEffect(() => {
         if ((item as any).url) {
             const searchResultItem = item as SearchResultItem;
@@ -35,7 +39,11 @@ const LyricsScreen = ({ route, navigation }: LyricsScreenProps) => {
     return (
         <View>
             <ScrollView>
-                <Text style={styles.lyricsText}>{lyricsText}</Text>
+                <Text style={[styles.lyricsText, {
+                    marginTop: insets.top + 20
+                }]}>
+                    {lyricsText}
+                </Text>
             </ScrollView>
         </View>
     );
@@ -43,7 +51,8 @@ const LyricsScreen = ({ route, navigation }: LyricsScreenProps) => {
 
 const styles = StyleSheet.create({
     lyricsText: {
-        margin: 20,
+        marginHorizontal: 20,
+        marginBottom: 20,
         fontSize: 24,
         fontWeight: "bold",
         color: "#000",

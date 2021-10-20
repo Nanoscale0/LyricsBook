@@ -3,7 +3,7 @@ import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { Dimensions, Pressable, StyleSheet, Text, View } from "react-native";
 import Card from "./Card";
 import MaterialIcon from "./MaterialIcon";
-import RipplePressable from "./RipplePressable";
+import SystemBack from "./SystemBack";
 
 interface MenuProps {
     children: ReactNode;
@@ -80,19 +80,23 @@ const Menu = ({ children, anchor, visible, dismiss }: MenuProps) => {
                 </Card>
             : null}
             {visible ?
-                <Portal>
-                    <Pressable
-                        style={styles.mask}
-                        android_disableSound
-                        onPress={dismiss} />
-                    <Card
-                        border
-                        style={[styles.menu, {
-                            top, left
-                        }]}>
-                        {children}
-                    </Card>
-                </Portal>
+                <>
+                    <SystemBack
+                        onBack={dismiss} />
+                    <Portal>
+                        <Pressable
+                            style={styles.mask}
+                            android_disableSound
+                            onPress={dismiss} />
+                        <Card
+                            border
+                            style={[styles.menu, {
+                                top, left
+                            }]}>
+                            {children}
+                        </Card>
+                    </Portal>
+                </>
             : null}
         </>
     );
@@ -124,7 +128,7 @@ Menu.Item = ({ title, onPress, icon }: MenuItemProps) => {
 const styles = StyleSheet.create({
     menu: {
         position: "absolute",
-        elevation: 5,
+        elevation: 8,
         minWidth: 150,
         padding: 5
     },

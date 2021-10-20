@@ -1,15 +1,21 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import IconButton from "./IconButton";
 
 interface HeaderProps {
     title: string;
     back?: () => void;
+    style?: StyleProp<ViewStyle>;
 }
 
-const Header = ({ title, back }: HeaderProps) => {
+const Header = ({ title, back, style }: HeaderProps) => {
+    const insets = useSafeAreaInsets();
+
     return (
-        <View style={styles.header}>
+        <View style={[styles.header, {
+            paddingTop: insets.top + 15
+        }, style]}>
             {back ?
                 <IconButton
                     icon="arrow-left"
@@ -25,7 +31,8 @@ const Header = ({ title, back }: HeaderProps) => {
 const styles = StyleSheet.create({
     header: {
         flexDirection: "row",
-        margin: 15,
+        paddingHorizontal: 15,
+        paddingBottom: 15,
         alignItems: "flex-start"
     },
     title: {

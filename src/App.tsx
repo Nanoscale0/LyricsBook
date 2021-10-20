@@ -5,7 +5,8 @@
 import { PortalProvider } from '@gorhom/portal';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { StatusBar } from 'react-native';
 
 import HomeScreen from './screens/HomeScreen';
 import LyricsScreen from './screens/LyricsScreen';
@@ -16,6 +17,12 @@ import { Site } from './values/sites';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const App = () => {
+    useEffect(() => {
+        StatusBar.setTranslucent(true);
+        StatusBar.setBackgroundColor("#FFFFFF00")
+        StatusBar.setBarStyle("dark-content");
+    }, []);
+
     return (
         <PortalProvider>
             <NavigationContainer>
